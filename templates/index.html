@@ -15,18 +15,22 @@
     <meta name="author" content="Andy Yang">
 
     <!-- Site Icons -->
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="shortcut icon" href="{{ url_for('static',filename='images/favicon.ico') }}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{{ url_for('static',filename='images/apple-touch-icon.png') }}">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
     <!-- Site CSS -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
     <!-- Responsive CSS -->
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/responsive.css') }}">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/custom.css">
-	<script src="js/modernizr.js"></script> <!-- Modernizr -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/custom.css') }}">
+	<script src="{{ url_for('static',filename='js/modernizr.js') }}"></script> <!-- Modernizr -->
+
+    <!-- Custom Scripts-->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -79,7 +83,7 @@
       </div>
     </nav>
 	
-	<section id="home" class="main-banner parallaxie" style="background: url('uploads/header.jpg')">
+	<section id="home" class="main-banner parallaxie" style="background: url('../static/uploads/header.jpg')">
 		<div class="heading">
 			<h1>Hello, I'm Andy</h1>
 			<p>I am a Senior Quantitative Analyst with over 4 years of experience in Data Analytics.
@@ -112,12 +116,44 @@
 
                 <div class="col-md-4">
                     <div class="right-box-pro">
-                        <img src="uploads/profile.jpg" alt="" class="img-fluid img-rounded">
+                        <img src="{{ url_for('static',filename='uploads/profile.jpg') }}" alt="" class="img-fluid img-rounded">
                     </div><!-- end media -->
                 </div><!-- end col -->
             </div><!-- end row -->
         </div><!-- end container -->
     </div><!-- end section -->
+
+    <!-- Chat Bot Section -->
+    <div id="chat" class="section lb">
+        <div class="container">
+            <div class="card">
+                <div class="card-header msg_head">
+                    <div class="d-flex bd-highlight">
+                        <div class="img_cont">
+                            <img src="{{ url_for('static', filename='uploads/profile.jpg')}}" class="rounded-circle user_img">
+                            <span class="online_icon"></span>
+                        </div>
+                        <div class="user_info">
+                            <span>Chat With Me!</span>
+                            <p>Ask me anything! For example: Where did you go to school?</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="messageFormeight" class="card-body msg_card_body">
+                    
+                </div>
+                <div class="loading"><div id="loading" class="loader" ></div></div>
+                <div class="card-footer">
+                    <form id="messageArea" class="input-group">
+                        <input type="text" id="text" name="msg" placeholder="Type your message..." autocomplete="off" class="form-control type_msg" required/>
+                        <div class="input-group-append">
+                            <button type="submit" id="send" class="input-group-text send_btn" onclick="loading()"><i class="fa fa-location-arrow"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 	
     <div id="experience" class="section lb">
         <div class="container">
@@ -140,7 +176,7 @@
             <div class="timeline">
                 <div class="container-tl left">
                     <div class="content">
-                        <div class = image-tl-left style="background-image:url('uploads/TD_Canada_Trust_logo.png')"></div>
+                        <div class = image-tl-left style="background-image:url('../static/uploads/TD_Canada_Trust_logo.png')"></div>
                         <h2>Senior Quantitative Analyst <br>(Model Validation)</h2>
                         <h4>TD Bank<br> Apr 2023 - Present</h4>
                         <p>Lead multiple Python and R-based structural projects aimed at enhancing the efficiency of TD systems</p>
@@ -160,7 +196,7 @@
                     </div>
                 </div>
                 <div class="container-tl right">
-                    <div class = image-tl-right style="background-image:url('uploads/TD_Canada_Trust_logo.png')"></div>
+                    <div class = image-tl-right style="background-image:url('../static/uploads/TD_Canada_Trust_logo.png')"></div>
                     <div class="content">
                         <h2>Quantitative Analyst (Model Validation)</h2>
                         <h4>TD Bank<br> Sept 2022 - Apr 2023</h4>
@@ -181,7 +217,7 @@
                 </div>
                 <div class="container-tl left">
                     <div class="content">
-                        <div class = image-tl-left style="background-image:url('uploads/royaldist.png')"></div>
+                        <div class = image-tl-left style="background-image:url('../static/uploads/royaldist.png')"></div>
                         <h2>Implementation Specialist</h2>
                         <h4>Royal Distributing Inc.<br> May 2021 - Aug 2021</h4>
                         <p>Integrated vendor data sources into ETL pipeline and expedited data transfer to Azure databases</p>
@@ -193,7 +229,7 @@
                     </div>
                 </div>
                 <div class="container-tl right">
-                    <div class = image-tl-right style="background-image:url('uploads/tmmc.png')"></div>
+                    <div class = image-tl-right style="background-image:url('../static/uploads/tmmc.png')"></div>
                     <div class="content">
                         <h2>Information Systems Analyst</h2>
                         <h4>Toyota Motor Manufacturing Company<br> Jan 2020 - Apr 2020</h4>
@@ -209,7 +245,7 @@
 
                 <div class="container-tl left">
                     <div class="content">
-                        <div class = image-tl-left style="background-image:url('uploads/jj.jpg')"></div>
+                        <div class = image-tl-left style="background-image:url('../static/uploads/jj.jpg')"></div>
                         <h2>Supply Chain Coordinator</h2>
                         <h4>Johnson & Johnson<br> May 2019 - Aug 2019</h4>
                         <p> Maintained and developed reporting tools using VBA excel and SAP </p>
@@ -236,7 +272,7 @@
 				<div class="col-md-4">
                     <div class="services-inner-box">
 						<div class="ser-icon">
-                            <img src="uploads/sentiment.PNG" alt="" width="125" height="120">
+                            <img src="../static/uploads/sentiment.PNG" alt="" width="125" height="120">
 						</div>
                         <br>
 						<h2>Twitter Sentiment Analysis</h2>
@@ -252,7 +288,7 @@
                 <div class="col-md-4">
                     <div class="services-inner-box">
 						<div class="ser-icon">
-                            <img src="uploads/lidar.svg" alt="" width="100", height="100">
+                            <img src="../static/uploads/lidar.svg" alt="" width="100", height="100">
 						</div>
                         <br>
 						<h2>LiDAR Object Detection for Cities (Capstone)</h2>
@@ -268,7 +304,7 @@
                 <div class="col-md-4">
                     <div class="services-inner-box">
 						<div class="ser-icon">
-							<img src="uploads/rainfall.svg" alt="" width="100", height="100">
+							<img src="../static/uploads/rainfall.svg" alt="" width="100", height="100">
 						</div>
                         <br>
 						<h2>Australian Rainfall Prediction</h2>
@@ -283,7 +319,7 @@
 				<div class="col-md-4">
                     <div class="services-inner-box">
 						<div class="ser-icon">
-							<img src="uploads/salary.svg" alt="" width="100", height="100">
+							<img src="../static/uploads/salary.svg" alt="" width="100", height="100">
 						</div>
                         <br>
 						<h2>US Salary Prediction</h2>
@@ -300,7 +336,7 @@
 				<div class="col-md-4">
                     <div class="services-inner-box">
 						<div class="ser-icon">
-							<img src="uploads/dash.svg" alt="" width="100", height="100">
+							<img src="../static/uploads/dash.svg" alt="" width="100", height="100">
 						</div>
                         <br>
 						<h2>Olympic Dash</h2>
@@ -318,7 +354,7 @@
                 <div class="col-md-4">
                     <div class="services-inner-box">
 						<div class="ser-icon">
-							<img src="uploads/lrasm.svg" alt="" width="100", height="100">
+							<img src="../static/uploads/lrasm.svg" alt="" width="100", height="100">
 						</div>
                         <br>
 						<h2>LRASM Package</h2>
@@ -347,21 +383,21 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="img-center-noshadow">
-                        <img src="uploads/gmail.png" alt="" width="100", height="100">
+                        <img src="../static/uploads/gmail.png" alt="" width="100", height="100">
                     </div>
                     <br>
                     <center><h4><a href="mailto:email@syyyang003@gmail.com">syyyang003@gmail.com</a></h4></center>
                 </div>
                 <div class="col-md-4">
                     <div class="img-center-noshadow">
-                        <img src="uploads/LinkedIn_icon.png" alt="" width="100", height="100">
+                        <img src="../static/uploads/LinkedIn_icon.png" alt="" width="100", height="100">
                     </div>
                     <br>
                     <center><h4><a href="https://www.linkedin.com/in/andyang80/">www.linkedin.com/in/andyang80</a></h4></center>
                 </div>
                 <div class="col-md-4">
                     <div class="img-center-noshadow">
-                        <img src="uploads/github-512.webp" alt="" width="100", height="100">
+                        <img src="../static/uploads/github-512.webp" alt="" width="100", height="100">
                     </div>
                     <br>
                     <center><h4><a href="https://github.com/AndyYang80/">https://github.com/AndyYang80</a></h4></center>
@@ -391,18 +427,52 @@
     <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
 
     <!-- ALL JS FILES -->
-    <script src="js/all.js"></script>
+    <script src="{{ url_for('static',filename='js/all.js') }}"></script>
 	<!-- Camera Slider -->
-	<script src="js/jquery.mobile.customized.min.js"></script>
-	<script src="js/jquery.easing.1.3.js"></script> 
-	<script src="js/parallaxie.js"></script>
-	<script src="js/headline.js"></script>
+	<script src="{{ url_for('static',filename='js/jquery.mobile.customized.min.js') }}"></script>
+	<script src="{{ url_for('static',filename='js/jquery.easing.1.3.js') }}"></script> 
+	<script src="{{ url_for('static',filename='js/parallaxie.js') }}"></script>
+	<script src="{{ url_for('static',filename='js/headline.js') }}"></script>
 	<!-- Contact form JavaScript -->
-    <script src="js/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
+    <script src="{{ url_for('static',filename='js/jqBootstrapValidation.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/contact_me.js') }}"></script>
     <!-- ALL PLUGINS -->
-    <script src="js/custom.js"></script>
-    <script src="js/jquery.vide.js"></script>
+    <script src="{{ url_for('static',filename='js/custom.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/jquery.vide.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $("#messageArea").on("submit", function(event) {
+                const date = new Date();
+                const hour = date.getHours();
+                const minute = date.getMinutes();
+                const str_time = hour+":"+minute;
+                var rawText = $("#text").val();
 
+                var userHtml = '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">' + rawText + '<span class="msg_time_send">'+ str_time + '</span></div><div class="img_cont_msg"></div></div>';
+                
+                $("#text").val("");
+                $("#messageFormeight").append(userHtml);
+
+                $.ajax({
+                    data: {
+                        msg: rawText,	
+                    },
+                    type: "POST",
+                    url: "/chat",
+                }).done(function(data) {
+                    var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';
+                    $("#messageFormeight").append($.parseHTML(botHtml));
+                    hideLoading();
+                    })
+                event.preventDefault();
+            });
+        });
+
+        function loading(){
+            $("#loading").show();
+            };
+
+        function hideLoading() {$("#loading").hide()}
+    </script>
 </body>
 </html>
