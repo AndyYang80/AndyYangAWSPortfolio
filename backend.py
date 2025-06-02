@@ -1,70 +1,67 @@
 import os
 import bs4
 import getpass
-from langchain import hub
-from dotenv import load_dotenv
-from langchain_community.vectorstores import Chroma
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
-from langchain_core.messages import HumanMessage, SystemMessage
+import boto3
+import json
+from botocore.exceptions import ClientError
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import WebBaseLoader
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnablePassthrough
-from langchain_core.prompts import PromptTemplate
-from langchain.schema import (
-    SystemMessage,
-    HumanMessage,
-    AIMessage
-)
+from langchain_community.vectorstores import FAISS
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_community.document_loaders import PyPDFLoader
+from langchain import hub
+from dotenv import load_dotenv
+from langchain_community.vectorstores import FAISS
+from markdown import markdown
+
 
 def response(user_query):
 
-    # # Load environment and get your openAI api key
-    # load_dotenv()
-    # openai_api_key = os.getenv("OPENAI_API_KEY")
+    def format_docs(docs):
+        return "\n\n".join(doc.page_content for doc in docs)
+    
+    client = boto3.client("bedrock-runtime", region_name="us-east-2")
 
+    # Set the model ID, e.g., Llama 3 70b Instruct.
+    model_id = "us.meta.llama3-2-1b-instruct-v1:0"
 
-    # # Select a webpage to load the context information from
-    # loader = WebBaseLoader(
-    #     web_paths=("https://www.linkedin.com/pulse/insights-post-pandemic-economy-our-2024-global-market-rob-sharps-jcnmc/",),
-    # )
-    # docs = loader.load()
+    docsearch = FAISS.load_local("vectorstore", OpenAIEmbeddings(), allow_dangerous_deserialization = True)
+    retriever = docsearch.as_retriever(search_type="similarity")
 
+    context = format_docs(retriever.invoke(user_query))
 
-    # # Restructure to process the info in chunks
-    # text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-    # splits = text_splitter.split_documents(docs)
-    # vectorstore = Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings())
+    # Embed the prompt in Llama 3's instruction format.
+    formatted_prompt = f"""
+    <|begin_of_text|><|start_header_id|>user<|end_header_id|>
+    You are Andy Yang, a experienced data scientist. Answer the question while conidering the following context: {context}
+    {user_query}
+    Do not give answer with false information and keep your answer within 1 paragraph.
+    <|eot_id|>
+    <|start_header_id|>assistant<|end_header_id|>
+    """
 
+    native_request = {
+        "prompt": formatted_prompt,
+        "max_gen_len": 256,
+        "temperature": 0.5,
+    }
 
-    # # Retrieve info from chosen source
-    # retriever = vectorstore.as_retriever(search_type="similarity")
-    # prompt = hub.pull("rlm/rag-prompt")
-    # llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0, openai_api_key=openai_api_key)
+    # Convert the native request to JSON.
+    request = json.dumps(native_request)
 
-    # def format_docs(docs):
-    #     return "\n\n".join(doc.page_content for doc in docs)
+    try:
+        # Invoke the model with the request.
+        response = client.invoke_model(modelId=model_id, body=request)
 
+    except (ClientError, Exception) as e:
+        print(f"ERROR: Can't invoke '{model_id}'. Reason: {e}")
+        exit(1)
 
+    # Decode the response body.
+    model_response = json.loads(response["body"].read())
 
-    # template = """Use the following pieces of context to answer the question at the end.
-    # Say that you don't know when asked a question you don't know, donot make up an answer. Be precise and concise in your answer.
+    # Extract and print the response text.
+    response_text = model_response["generation"]
 
-    # {context}
-
-    # Question: {question}
-
-    # Helpful Answer:"""
-
-    # # Add the context to your user query
-    # custom_rag_prompt = PromptTemplate.from_template(template)
-
-    # rag_chain = (
-    #     {"context": retriever | format_docs, "question": RunnablePassthrough()}
-    #     | custom_rag_prompt
-    #     | llm
-    #     | StrOutputParser()
-    # )
-
-    # return rag_chain.invoke(user_query) 
-    return "test result"
+    return markdown(response_text)
