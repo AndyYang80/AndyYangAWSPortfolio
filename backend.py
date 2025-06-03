@@ -1,17 +1,9 @@
 import os
-import bs4
-import getpass
 import boto3
 import json
 from botocore.exceptions import ClientError
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.document_loaders import WebBaseLoader
-from langchain_core.output_parsers import StrOutputParser
 from langchain_community.vectorstores import FAISS
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
-from langchain_community.document_loaders import PyPDFLoader
-from langchain import hub
-from dotenv import load_dotenv
 from langchain_community.vectorstores import FAISS
 from markdown import markdown
 
