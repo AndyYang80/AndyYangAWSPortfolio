@@ -12,11 +12,7 @@ def index():
 @app.route('/chat', methods=['GET', 'POST'])
 def chat():
     message = request.form['msg']
-    print(request.form['msg'])
-    print(response)
     return response(message)
-
-
 
 if __name__ == '__main__':
     app.run() 

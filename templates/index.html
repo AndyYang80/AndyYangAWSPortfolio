@@ -87,7 +87,7 @@
       </div>
     </nav>
 	
-	<section id="home" class="main-banner parallaxie" style="background: url('../static/uploads/header.jpg')">
+	<section id="home" class="main-banner parallaxie" style="background: url({{ url_for('static',filename='uploads/header.jpg') }})">
 		<div class="heading">
 			<h1>Hello, I'm Andy</h1>
 			<p>I am a Senior Quantitative Analyst with over 4 years of experience in Data Analytics.
@@ -113,7 +113,7 @@
                         </p>
                         <p> For more information, my resume is available for download below.</p>
 
-                        <a href="Andy-Yang-Resume-2025.pdf" target="_blank", class="sim-btn btn-hover-new" data-text="Preview CV"><span>Preview CV</span></a>
+                        <a href="{{ url_for('static',filename='Andy-Yang-Resume-2025.pdf') }}" target="_blank", class="sim-btn btn-hover-new" data-text="Preview CV"><span>Preview CV</span></a>
                         <!-- <a href="Andy-Yang-Resume-2022-S3.pdf" download="resume.pdf" class="sim-btn btn-hover-new" data-text="Download CV"><span>Download CV</span></a> -->
                     </div><!-- end messagebox -->
                 </div><!-- end col -->
@@ -180,7 +180,7 @@
             <div class="timeline">
                 <div class="container-tl left">
                     <div class="content">
-                        <div class = image-tl-left style="background-image:url('../static/uploads/TD_Canada_Trust_logo.png')"></div>
+                        <div class = image-tl-left style="background-image:url({{ url_for('static', filename='uploads/TD_Canada_Trust_logo.png')}})"></div>
                         <h2>Senior Quantitative Analyst <br>(Model Validation)</h2>
                         <h4>TD Bank<br> Apr 2023 - Present</h4>
                         <p>Lead multiple Python and R-based structural projects aimed at enhancing the efficiency of TD systems</p>
@@ -200,7 +200,7 @@
                     </div>
                 </div>
                 <div class="container-tl right">
-                    <div class = image-tl-right style="background-image:url('../static/uploads/TD_Canada_Trust_logo.png')"></div>
+                    <div class = image-tl-right style="background-image:url({{ url_for('static', filename='uploads/TD_Canada_Trust_logo.png')}})"></div>
                     <div class="content">
                         <h2>Quantitative Analyst (Model Validation)</h2>
                         <h4>TD Bank<br> Sept 2022 - Apr 2023</h4>
@@ -221,7 +221,7 @@
                 </div>
                 <div class="container-tl left">
                     <div class="content">
-                        <div class = image-tl-left style="background-image:url('../static/uploads/royaldist.png')"></div>
+                        <div class = image-tl-left style="background-image:url({{ url_for('static', filename='uploads/royaldist.png')}})"></div>
                         <h2>Implementation Specialist</h2>
                         <h4>Royal Distributing Inc.<br> May 2021 - Aug 2021</h4>
                         <p>Integrated vendor data sources into ETL pipeline and expedited data transfer to Azure databases</p>
@@ -233,7 +233,7 @@
                     </div>
                 </div>
                 <div class="container-tl right">
-                    <div class = image-tl-right style="background-image:url('../static/uploads/tmmc.png')"></div>
+                    <div class = image-tl-right style="background-image:url({{ url_for('static', filename='uploads/tmmc.png')}})"></div>
                     <div class="content">
                         <h2>Information Systems Analyst</h2>
                         <h4>Toyota Motor Manufacturing Company<br> Jan 2020 - Apr 2020</h4>
@@ -249,7 +249,7 @@
 
                 <div class="container-tl left">
                     <div class="content">
-                        <div class = image-tl-left style="background-image:url('../static/uploads/jj.jpg')"></div>
+                        <div class = image-tl-left style="background-image:url({{ url_for('static', filename='uploads/tmmc.png')}})"></div>
                         <h2>Supply Chain Coordinator</h2>
                         <h4>Johnson & Johnson<br> May 2019 - Aug 2019</h4>
                         <p> Maintained and developed reporting tools using VBA excel and SAP </p>
@@ -276,7 +276,7 @@
 				<div class="col-md-4">
                     <div class="services-inner-box">
 						<div class="ser-icon">
-                            <img src="../static/uploads/sentiment.PNG" alt="" width="125" height="120">
+                            <img src="{{ url_for('static', filename='uploads/sentiment.PNG')}}" alt="" width="125" height="120">
 						</div>
                         <br>
 						<h2>Twitter Sentiment Analysis</h2>
@@ -292,7 +292,7 @@
                 <div class="col-md-4">
                     <div class="services-inner-box">
 						<div class="ser-icon">
-                            <img src="../static/uploads/lidar.svg" alt="" width="100", height="100">
+                            <img src="{{ url_for('static', filename='uploads/lidar.svg')}}" alt="" width="100", height="100">
 						</div>
                         <br>
 						<h2>LiDAR Object Detection for Cities (Capstone)</h2>
@@ -308,7 +308,7 @@
                 <div class="col-md-4">
                     <div class="services-inner-box">
 						<div class="ser-icon">
-							<img src="../static/uploads/rainfall.svg" alt="" width="100", height="100">
+							<img src="{{ url_for('static', filename='uploads/rainfall.svg')}}" alt="" width="100", height="100">
 						</div>
                         <br>
 						<h2>Australian Rainfall Prediction</h2>
@@ -323,7 +323,7 @@
 				<div class="col-md-4">
                     <div class="services-inner-box">
 						<div class="ser-icon">
-							<img src="../static/uploads/salary.svg" alt="" width="100", height="100">
+							<img src="{{ url_for('static', filename='uploads/salary.svg')}}" alt="" width="100", height="100">
 						</div>
                         <br>
 						<h2>US Salary Prediction</h2>
@@ -340,7 +340,7 @@
 				<div class="col-md-4">
                     <div class="services-inner-box">
 						<div class="ser-icon">
-							<img src="../static/uploads/dash.svg" alt="" width="100", height="100">
+							<img src="{{ url_for('static', filename='uploads/dash.svg')}}" alt="" width="100", height="100">
 						</div>
                         <br>
 						<h2>Olympic Dash</h2>
@@ -358,7 +358,7 @@
                 <div class="col-md-4">
                     <div class="services-inner-box">
 						<div class="ser-icon">
-							<img src="../static/uploads/lrasm.svg" alt="" width="100", height="100">
+							<img src="{{ url_for('static', filename='uploads/lrasm.svg')}}" alt="" width="100", height="100">
 						</div>
                         <br>
 						<h2>LRASM Package</h2>
@@ -387,21 +387,21 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="img-center-noshadow">
-                        <img src="../static/uploads/gmail.png" alt="" width="100", height="100">
+                        <img src="{{ url_for('static', filename='uploads/gmail.png')}}" alt="" width="100", height="100">
                     </div>
                     <br>
                     <center><h4><a href="mailto:email@syyyang003@gmail.com">syyyang003@gmail.com</a></h4></center>
                 </div>
                 <div class="col-md-4">
                     <div class="img-center-noshadow">
-                        <img src="../static/uploads/LinkedIn_icon.png" alt="" width="100", height="100">
+                        <img src="{{ url_for('static', filename='uploads/LinkedIn_icon.png')}}" alt="" width="100", height="100">
                     </div>
                     <br>
                     <center><h4><a href="https://www.linkedin.com/in/andyang80/">www.linkedin.com/in/andyang80</a></h4></center>
                 </div>
                 <div class="col-md-4">
                     <div class="img-center-noshadow">
-                        <img src="../static/uploads/github-512.webp" alt="" width="100", height="100">
+                        <img src="{{ url_for('static', filename='uploads/github-512.webp')}}" alt="" width="100", height="100">
                     </div>
                     <br>
                     <center><h4><a href="https://github.com/AndyYang80/">https://github.com/AndyYang80</a></h4></center>
