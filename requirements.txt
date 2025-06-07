@@ -4,4 +4,3 @@ flask==3.1.1
 langchain-community==0.3.24
 langchain-openai==0.3.19
 markdown==3.8
-pip-chill==1.0.3
