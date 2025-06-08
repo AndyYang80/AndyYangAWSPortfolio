@@ -33,11 +33,10 @@ def response(user_query):
             )
 
     except (ClientError, Exception) as e:
-        print(f"ERROR: Can't invoke '{model_id}'. Reason: {e}")
-        exit(1)
+        raise Exception(f"ERROR: Can't invoke '{model_id}'. Reason: {e}")
 
     # Decode the response body.
     model_response = json.loads(out["Payload"].read())
     model_response = model_response.strip("\n")
-    print(model_response)
+
     return markdown(model_response)
